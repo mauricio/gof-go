@@ -17,5 +17,5 @@ func TestBuilder_Build(t *testing.T) {
 	assert.Equal(t, "Golang patterns", request.Header.Get("User-Agent"))
 	assert.Equal(t, http.MethodGet, request.Method)
 	assert.Equal(t, "https://example.com/", request.URL.String())
-	
+
 }

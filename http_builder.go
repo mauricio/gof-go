@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+// NewBuilder creates a builder given a URL, we're going to use this so we don't leak
+// the actual builder and have to worry about null/empty values on the builder itself.
+// You could just use a struct directly here but it makes it a bit harder to validate
+// defaults so we'll go for the simpler interface based solution.
 func NewBuilder(url string) HTTPBuilder {
 	return &builder{
 		headers: map[string][]string{},
@@ -17,6 +21,8 @@ func NewBuilder(url string) HTTPBuilder {
 	}
 }
 
+// HTTPBuilder defines the fields we want to set on this builder, you could add/remove
+// fields here.
 type HTTPBuilder interface {
 	AddHeader(name, value string) HTTPBuilder
 	Body(r io.Reader) HTTPBuilder
